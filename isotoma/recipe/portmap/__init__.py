@@ -22,6 +22,8 @@ class Portmap(object):
         self.options = options
         base = int(self.options['base'])
 
+        self.pm = {}
+
         for offset in self.options['offsets'].strip().split("\n"):
             if offset:
                 name, value = offset.split()
