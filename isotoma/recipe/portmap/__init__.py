@@ -21,9 +21,12 @@ class Portmap(object):
         self.name = name
         self.options = options
         base = int(self.options['base'])
-        self.pm = dict([(x, int(y)) for x, y in [
-                    x.split() for x in 
-                        self.options['offsets'].strip().split("\n")]])
+
+        for offset in self.options['offsets'].strip().split("\n"):
+            if offset:
+                name, value = offset.split()
+                self.pm[name] = int(value)
+
         for k, v in self.pm.items():
             self.options.setdefault(k, str(base + v))
 
